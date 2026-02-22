@@ -107,6 +107,11 @@
     padding: 0;
 }
 
+/* Hide elements until Alpine.js initializes */
+[x-cloak] {
+    display: none !important;
+}
+
 html {
     scroll-behavior: smooth;
     font-size: 16px;

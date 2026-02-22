@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>[x-cloak] { display: none !important; }</style>
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title><?= e($pageTitle ?? APP_NAME . ' — ' . APP_TAGLINE) ?></title>
     <meta name="description" content="<?= e($metaDescription ?? setting('meta_description', 'Premium Madagascar travel experiences.')) ?>">

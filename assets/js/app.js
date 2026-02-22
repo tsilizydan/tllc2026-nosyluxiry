@@ -5,7 +5,6 @@
 function app() {
     return {
         scrolled: false,
-        mobileOpen: false,
 
         init() {
             // Scroll reveal

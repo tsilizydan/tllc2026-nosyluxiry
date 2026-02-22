@@ -471,8 +471,10 @@ h6 {
     transition: all var(--transition-base);
 }
 
-/* ─── Offcanvas Drawer (Mobile) ─── */
+/* ─── Offcanvas Drawer (Mobile Only) ─── */
 .offcanvas-overlay {
+    display: none;
+    /* Hidden on desktop */
     position: fixed;
     inset: 0;
     background: rgba(0, 0, 0, 0);
@@ -489,6 +491,8 @@ h6 {
 }
 
 .offcanvas-drawer {
+    display: none;
+    /* Hidden on desktop */
     position: fixed;
     top: 0;
     right: 0;
@@ -499,7 +503,6 @@ h6 {
     z-index: 1001;
     transform: translateX(100%);
     transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-    display: flex;
     flex-direction: column;
     overflow-y: auto;
 }
@@ -1937,6 +1940,15 @@ select.form-control {
 
     .nav-lang-switcher {
         display: none;
+    }
+
+    /* Show offcanvas on mobile */
+    .offcanvas-overlay {
+        display: block;
+    }
+
+    .offcanvas-drawer {
+        display: flex;
     }
 
     /* Hero */

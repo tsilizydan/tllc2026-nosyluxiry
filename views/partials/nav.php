@@ -1,104 +1,142 @@
-<!-- Navigation Wrapper — shared Alpine scope for nav + offcanvas -->
-<div x-data="{ scrolled: false, mobileOpen: false }"
-     @scroll.window="scrolled = (window.scrollY > 50)">
+<!-- ═══════════════════════════════════════════════════════════
+     NAVBAR — Self-contained Alpine component
+     Features: sticky scroll effect, animated hamburger,
+     offcanvas drawer with overlay, escape/outside-click close,
+     body scroll lock, ARIA accessible
+     ═══════════════════════════════════════════════════════════ -->
+<header x-data="{
+    scrolled: false,
+    mobileOpen: false,
+    open()  { this.mobileOpen = true;  document.body.style.overflow = 'hidden'; },
+    close() { this.mobileOpen = false; document.body.style.overflow = ''; }
+}" @scroll.window="scrolled = (window.scrollY > 50)"
+   @keydown.escape.window="close()">
 
-    <!-- ─── Navbar ─── -->
-    <nav class="navbar" id="navbar" :class="{ 'scrolled': scrolled }">
-        <div class="container">
+    <!-- ─── Top Bar ─── -->
+    <nav class="navbar" :class="{ 'navbar--scrolled': scrolled }" role="navigation" aria-label="Main navigation">
+        <div class="navbar__container">
             <!-- Brand -->
-            <a href="<?= url('/') ?>" class="navbar-brand">
-                <div class="brand-icon"><i class="fas fa-leaf"></i></div>
-                <span>Nosy Luxury</span>
+            <a href="<?= url('/') ?>" class="navbar__brand">
+                <span class="navbar__brand-icon"><i class="fas fa-leaf"></i></span>
+                <span class="navbar__brand-text">Nosy Luxury</span>
             </a>
 
-            <!-- Desktop Nav -->
-            <div class="nav-links">
-                <a href="<?= url('/') ?>" class="<?= isActive('/') && $_SERVER['REQUEST_URI'] === '/' ? 'active' : '' ?>"><?= __('nav.home') ?></a>
-                <a href="<?= url('/destinations') ?>" class="<?= isActive('/destinations') ?>"><?= __('nav.destinations') ?></a>
-                <a href="<?= url('/tours') ?>" class="<?= isActive('/tours') ?>"><?= __('nav.tours') ?></a>
-                <a href="<?= url('/trip-builder') ?>" class="<?= isActive('/trip-builder') ?>"><?= __('nav.trip_builder') ?></a>
-                <a href="<?= url('/about') ?>" class="<?= isActive('/about') ?>"><?= __('nav.about') ?></a>
-                <a href="<?= url('/blog') ?>" class="<?= isActive('/blog') ?>"><?= __('nav.blog') ?></a>
-                <a href="<?= url('/contact') ?>" class="<?= isActive('/contact') ?>"><?= __('nav.contact') ?></a>
-            </div>
+            <!-- Desktop Links -->
+            <ul class="navbar__links" role="menubar">
+                <li role="none"><a href="<?= url('/') ?>" role="menuitem" class="<?= isActive('/') && ($_SERVER['REQUEST_URI'] ?? '') === '/' ? 'active' : '' ?>"><?= __('nav.home') ?></a></li>
+                <li role="none"><a href="<?= url('/destinations') ?>" role="menuitem" class="<?= isActive('/destinations') ?>"><?= __('nav.destinations') ?></a></li>
+                <li role="none"><a href="<?= url('/tours') ?>" role="menuitem" class="<?= isActive('/tours') ?>"><?= __('nav.tours') ?></a></li>
+                <li role="none"><a href="<?= url('/trip-builder') ?>" role="menuitem" class="<?= isActive('/trip-builder') ?>"><?= __('nav.trip_builder') ?></a></li>
+                <li role="none"><a href="<?= url('/about') ?>" role="menuitem" class="<?= isActive('/about') ?>"><?= __('nav.about') ?></a></li>
+                <li role="none"><a href="<?= url('/blog') ?>" role="menuitem" class="<?= isActive('/blog') ?>"><?= __('nav.blog') ?></a></li>
+                <li role="none"><a href="<?= url('/contact') ?>" role="menuitem" class="<?= isActive('/contact') ?>"><?= __('nav.contact') ?></a></li>
+            </ul>
 
-            <!-- Actions -->
-            <div class="nav-actions">
-                <!-- Language Switcher (desktop only) -->
-                <div class="nav-lang-switcher">
+            <!-- Desktop Actions -->
+            <div class="navbar__actions">
+                <!-- Language Switcher -->
+                <div class="navbar__lang">
                     <?php foreach (Language::available() as $code => $label): ?>
                         <a href="<?= url('/lang/' . $code) ?>" class="<?= Language::current() === $code ? 'active' : '' ?>"><?= strtoupper($code) ?></a>
                     <?php endforeach; ?>
                 </div>
 
-                <!-- Auth -->
+                <!-- Auth Button -->
                 <?php if (Auth::check()): ?>
-                    <a href="<?= url('/account') ?>" class="btn btn-outline btn-sm"><i class="fas fa-user"></i> <?= e(Session::get('user_name', '')) ?></a>
+                    <a href="<?= url('/account') ?>" class="navbar__cta">
+                        <i class="fas fa-user"></i>
+                        <span><?= e(Session::get('user_name', '')) ?></span>
+                    </a>
                 <?php else: ?>
-                    <a href="<?= url('/login') ?>" class="btn btn-outline btn-sm"><?= __('nav.login') ?></a>
+                    <a href="<?= url('/login') ?>" class="navbar__cta"><?= __('nav.login') ?></a>
                 <?php endif; ?>
 
-                <!-- Mobile Toggle -->
-                <button class="nav-toggle" @click="mobileOpen = true" aria-label="Open menu">
-                    <span></span><span></span><span></span>
+                <!-- Hamburger Toggle -->
+                <button class="navbar__hamburger"
+                        :class="{ 'is-active': mobileOpen }"
+                        @click="mobileOpen ? close() : open()"
+                        :aria-expanded="mobileOpen.toString()"
+                        aria-controls="mobile-drawer"
+                        aria-label="Toggle navigation">
+                    <span class="navbar__hamburger-line"></span>
+                    <span class="navbar__hamburger-line"></span>
+                    <span class="navbar__hamburger-line"></span>
                 </button>
             </div>
         </div>
     </nav>
 
-    <!-- ═══ OFFCANVAS DRAWER (outside nav to avoid flex layout issues) ═══ -->
+    <!-- ─── Mobile Overlay ─── -->
+    <div class="drawer-overlay"
+         :class="{ 'is-visible': mobileOpen }"
+         @click="close()"
+         aria-hidden="true"></div>
 
-    <!-- Overlay -->
-    <div class="offcanvas-overlay"
-         :class="{ 'active': mobileOpen }"
-         @click="mobileOpen = false"></div>
+    <!-- ─── Mobile Drawer ─── -->
+    <aside id="mobile-drawer"
+           class="drawer"
+           :class="{ 'is-open': mobileOpen }"
+           role="dialog"
+           :aria-modal="mobileOpen.toString()"
+           aria-label="Mobile navigation">
 
-    <!-- Drawer -->
-    <div class="offcanvas-drawer"
-         :class="{ 'open': mobileOpen }"
-         x-effect="document.body.classList.toggle('offcanvas-open', mobileOpen)">
-        <!-- Header -->
-        <div class="offcanvas-header">
-            <a href="<?= url('/') ?>" class="navbar-brand" @click="mobileOpen = false">
-                <div class="brand-icon"><i class="fas fa-leaf"></i></div>
-                <span>Nosy Luxury</span>
+        <!-- Drawer Header -->
+        <div class="drawer__header">
+            <a href="<?= url('/') ?>" class="navbar__brand" @click="close()">
+                <span class="navbar__brand-icon"><i class="fas fa-leaf"></i></span>
+                <span class="navbar__brand-text">Nosy Luxury</span>
             </a>
-            <button class="offcanvas-close" @click="mobileOpen = false" aria-label="Close menu">
+            <button class="drawer__close" @click="close()" aria-label="Close menu">
                 <i class="fas fa-times"></i>
             </button>
         </div>
 
-        <!-- Links -->
-        <div class="offcanvas-body">
-            <a href="<?= url('/') ?>" @click="mobileOpen = false"><?= __('nav.home') ?></a>
-            <a href="<?= url('/destinations') ?>" @click="mobileOpen = false"><?= __('nav.destinations') ?></a>
-            <a href="<?= url('/tours') ?>" @click="mobileOpen = false"><?= __('nav.tours') ?></a>
-            <a href="<?= url('/trip-builder') ?>" @click="mobileOpen = false"><?= __('nav.trip_builder') ?></a>
-            <a href="<?= url('/about') ?>" @click="mobileOpen = false"><?= __('nav.about') ?></a>
-            <a href="<?= url('/blog') ?>" @click="mobileOpen = false"><?= __('nav.blog') ?></a>
-            <a href="<?= url('/contact') ?>" @click="mobileOpen = false"><?= __('nav.contact') ?></a>
+        <!-- Drawer Navigation -->
+        <nav class="drawer__nav" aria-label="Mobile navigation links">
+            <a href="<?= url('/') ?>" @click="close()" class="<?= isActive('/') && ($_SERVER['REQUEST_URI'] ?? '') === '/' ? 'active' : '' ?>">
+                <i class="fas fa-home"></i><?= __('nav.home') ?>
+            </a>
+            <a href="<?= url('/destinations') ?>" @click="close()" class="<?= isActive('/destinations') ?>">
+                <i class="fas fa-map-marker-alt"></i><?= __('nav.destinations') ?>
+            </a>
+            <a href="<?= url('/tours') ?>" @click="close()" class="<?= isActive('/tours') ?>">
+                <i class="fas fa-compass"></i><?= __('nav.tours') ?>
+            </a>
+            <a href="<?= url('/trip-builder') ?>" @click="close()" class="<?= isActive('/trip-builder') ?>">
+                <i class="fas fa-magic"></i><?= __('nav.trip_builder') ?>
+            </a>
+            <a href="<?= url('/about') ?>" @click="close()" class="<?= isActive('/about') ?>">
+                <i class="fas fa-info-circle"></i><?= __('nav.about') ?>
+            </a>
+            <a href="<?= url('/blog') ?>" @click="close()" class="<?= isActive('/blog') ?>">
+                <i class="fas fa-newspaper"></i><?= __('nav.blog') ?>
+            </a>
+            <a href="<?= url('/contact') ?>" @click="close()" class="<?= isActive('/contact') ?>">
+                <i class="fas fa-envelope"></i><?= __('nav.contact') ?>
+            </a>
 
-            <div class="offcanvas-divider"></div>
+            <div class="drawer__divider"></div>
 
-            <!-- Auth links -->
+            <!-- Auth -->
             <?php if (Auth::check()): ?>
-                <a href="<?= url('/account') ?>" @click="mobileOpen = false"><i class="fas fa-user"></i> <?= __('nav.account') ?></a>
-                <a href="<?= url('/logout') ?>" @click="mobileOpen = false"><i class="fas fa-sign-out-alt"></i> <?= __('nav.logout') ?></a>
+                <a href="<?= url('/account') ?>" @click="close()"><i class="fas fa-user-circle"></i><?= __('nav.account') ?></a>
+                <a href="<?= url('/logout') ?>" @click="close()"><i class="fas fa-sign-out-alt"></i><?= __('nav.logout') ?></a>
             <?php else: ?>
-                <a href="<?= url('/login') ?>" @click="mobileOpen = false"><i class="fas fa-sign-in-alt"></i> <?= __('nav.login') ?></a>
-                <a href="<?= url('/register') ?>" @click="mobileOpen = false"><i class="fas fa-user-plus"></i> <?= __('nav.register') ?></a>
+                <a href="<?= url('/login') ?>" @click="close()"><i class="fas fa-sign-in-alt"></i><?= __('nav.login') ?></a>
+                <a href="<?= url('/register') ?>" @click="close()"><i class="fas fa-user-plus"></i><?= __('nav.register') ?></a>
             <?php endif; ?>
-        </div>
+        </nav>
 
-        <!-- Footer — Language Switcher -->
-        <div class="offcanvas-footer">
-            <div class="offcanvas-lang">
+        <!-- Drawer Footer -->
+        <div class="drawer__footer">
+            <div class="drawer__lang">
                 <?php foreach (Language::available() as $code => $label): ?>
                     <a href="<?= url('/lang/' . $code) ?>"
                        class="<?= Language::current() === $code ? 'active' : '' ?>"
-                       @click="mobileOpen = false"><?= strtoupper($code) ?></a>
+                       @click="close()"><?= strtoupper($code) ?></a>
                 <?php endforeach; ?>
             </div>
+            <p class="drawer__copyright">© <?= date('Y') ?> Nosy Luxury</p>
         </div>
-    </div>
-</div>
+    </aside>
+</header>

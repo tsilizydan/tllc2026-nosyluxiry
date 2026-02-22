@@ -20,9 +20,9 @@ define('BASE_URL', rtrim($protocol . '://' . $host, '/'));
 
 // --- Database ---
 define('DB_HOST', 'localhost');
-define('DB_NAME', 'nosy_luxury');
-define('DB_USER', 'root');
-define('DB_PASS', '');
+define('DB_NAME', 'tsilscpx_nosy_luxury');
+define('DB_USER', 'tsilscpx_chibi_admin');
+define('DB_PASS', '9@UPN~I@O]Dw');
 define('DB_CHARSET', 'utf8mb4');
 
 // --- Paths ---
@@ -64,3 +64,4 @@ define('ITEMS_PER_PAGE', 12);
 define('CONTACT_EMAIL', 'info@nosyluxury.com');
 define('CONTACT_PHONE', '+261 34 00 000 00');
 define('WHATSAPP_NUMBER', '+261340000000');
+

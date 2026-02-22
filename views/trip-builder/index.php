@@ -50,7 +50,7 @@
             </div>
 
             <!-- Step 2: Preferences -->
-            <div x-show="step === 2" style="background:var(--color-dark-card);border:1px solid var(--color-dark-border);border-radius:var(--radius-lg);padding:var(--space-8);">
+            <div x-show="step === 2" x-cloak style="background:var(--color-dark-card);border:1px solid var(--color-dark-border);border-radius:var(--radius-lg);padding:var(--space-8);">
                 <h3 style="margin-bottom:var(--space-6);">Tell us your <span class="text-gold">preferences</span></h3>
                 <div class="grid grid-2" style="gap:var(--space-4);">
                     <div class="form-group">
@@ -92,7 +92,7 @@
             </div>
 
             <!-- Step 3: Interests -->
-            <div x-show="step === 3" style="background:var(--color-dark-card);border:1px solid var(--color-dark-border);border-radius:var(--radius-lg);padding:var(--space-8);">
+            <div x-show="step === 3" x-cloak style="background:var(--color-dark-card);border:1px solid var(--color-dark-border);border-radius:var(--radius-lg);padding:var(--space-8);">
                 <h3 style="margin-bottom:var(--space-6);">What are your <span class="text-gold">interests?</span></h3>
                 <div class="grid grid-3" style="gap:var(--space-3);">
                     <?php
@@ -112,7 +112,7 @@
             </div>
 
             <!-- Step 4: Contact Details -->
-            <div x-show="step === 4" style="background:var(--color-dark-card);border:1px solid var(--color-dark-border);border-radius:var(--radius-lg);padding:var(--space-8);">
+            <div x-show="step === 4" x-cloak style="background:var(--color-dark-card);border:1px solid var(--color-dark-border);border-radius:var(--radius-lg);padding:var(--space-8);">
                 <h3 style="margin-bottom:var(--space-6);">Almost there! Your <span class="text-gold">details</span></h3>
                 <div class="grid grid-2" style="gap:var(--space-4);">
                     <div class="form-group">
@@ -138,7 +138,7 @@
 
             <!-- Navigation Buttons -->
             <div style="display:flex;justify-content:space-between;align-items:center;margin-top:var(--space-6);flex-wrap:wrap;gap:var(--space-3);">
-                <button type="button" @click="prevStep()" x-show="step > 1" class="btn btn-outline">
+                <button type="button" @click="prevStep()" x-show="step > 1" x-cloak class="btn btn-outline">
                     <i class="fas fa-arrow-left"></i> Previous
                 </button>
                 <div></div>
@@ -148,9 +148,10 @@
                         :style="!canProceed ? 'opacity:0.5;cursor:not-allowed;' : ''">
                     Next <i class="fas fa-arrow-right"></i>
                 </button>
-                <button type="submit" x-show="step === 4" class="btn btn-primary btn-lg"
-                        :disabled="!canProceed"
-                        :style="!canProceed ? 'opacity:0.5;cursor:not-allowed;' : ''">
+                <button type="button" x-show="step === 4" x-cloak
+                        class="btn btn-primary btn-lg"
+                        :style="!canProceed ? 'opacity:0.5;cursor:not-allowed;' : ''"
+                        @click="if (validate(4)) { $el.closest('form').submit(); }">
                     <i class="fas fa-paper-plane"></i> Submit Request
                 </button>
             </div>

@@ -1,56 +1,61 @@
-<!-- Navigation -->
-<nav class="navbar" id="navbar"
-     @scroll.window="scrolled = (window.scrollY > 50)"
-     :class="{ 'scrolled': scrolled }">
-    <div class="container">
-        <!-- Brand -->
-        <a href="<?= url('/') ?>" class="navbar-brand">
-            <div class="brand-icon"><i class="fas fa-leaf"></i></div>
-            <span>Nosy Luxury</span>
-        </a>
+<!-- Navigation Wrapper — shared Alpine scope for nav + offcanvas -->
+<div x-data="{ scrolled: false, mobileOpen: false }"
+     @scroll.window="scrolled = (window.scrollY > 50)">
 
-        <!-- Desktop Nav -->
-        <div class="nav-links">
-            <a href="<?= url('/') ?>" class="<?= isActive('/') && $_SERVER['REQUEST_URI'] === '/' ? 'active' : '' ?>"><?= __('nav.home') ?></a>
-            <a href="<?= url('/destinations') ?>" class="<?= isActive('/destinations') ?>"><?= __('nav.destinations') ?></a>
-            <a href="<?= url('/tours') ?>" class="<?= isActive('/tours') ?>"><?= __('nav.tours') ?></a>
-            <a href="<?= url('/trip-builder') ?>" class="<?= isActive('/trip-builder') ?>"><?= __('nav.trip_builder') ?></a>
-            <a href="<?= url('/about') ?>" class="<?= isActive('/about') ?>"><?= __('nav.about') ?></a>
-            <a href="<?= url('/blog') ?>" class="<?= isActive('/blog') ?>"><?= __('nav.blog') ?></a>
-            <a href="<?= url('/contact') ?>" class="<?= isActive('/contact') ?>"><?= __('nav.contact') ?></a>
-        </div>
+    <!-- ─── Navbar ─── -->
+    <nav class="navbar" id="navbar" :class="{ 'scrolled': scrolled }">
+        <div class="container">
+            <!-- Brand -->
+            <a href="<?= url('/') ?>" class="navbar-brand">
+                <div class="brand-icon"><i class="fas fa-leaf"></i></div>
+                <span>Nosy Luxury</span>
+            </a>
 
-        <!-- Actions -->
-        <div class="nav-actions">
-            <!-- Language Switcher (desktop only — mobile one is inside drawer) -->
-            <div class="nav-lang-switcher">
-                <?php foreach (Language::available() as $code => $label): ?>
-                    <a href="<?= url('/lang/' . $code) ?>" class="<?= Language::current() === $code ? 'active' : '' ?>"><?= strtoupper($code) ?></a>
-                <?php endforeach; ?>
+            <!-- Desktop Nav -->
+            <div class="nav-links">
+                <a href="<?= url('/') ?>" class="<?= isActive('/') && $_SERVER['REQUEST_URI'] === '/' ? 'active' : '' ?>"><?= __('nav.home') ?></a>
+                <a href="<?= url('/destinations') ?>" class="<?= isActive('/destinations') ?>"><?= __('nav.destinations') ?></a>
+                <a href="<?= url('/tours') ?>" class="<?= isActive('/tours') ?>"><?= __('nav.tours') ?></a>
+                <a href="<?= url('/trip-builder') ?>" class="<?= isActive('/trip-builder') ?>"><?= __('nav.trip_builder') ?></a>
+                <a href="<?= url('/about') ?>" class="<?= isActive('/about') ?>"><?= __('nav.about') ?></a>
+                <a href="<?= url('/blog') ?>" class="<?= isActive('/blog') ?>"><?= __('nav.blog') ?></a>
+                <a href="<?= url('/contact') ?>" class="<?= isActive('/contact') ?>"><?= __('nav.contact') ?></a>
             </div>
 
-            <!-- Auth -->
-            <?php if (Auth::check()): ?>
-                <a href="<?= url('/account') ?>" class="btn btn-outline btn-sm"><i class="fas fa-user"></i> <?= e(Session::get('user_name', '')) ?></a>
-            <?php else: ?>
-                <a href="<?= url('/login') ?>" class="btn btn-outline btn-sm"><?= __('nav.login') ?></a>
-            <?php endif; ?>
+            <!-- Actions -->
+            <div class="nav-actions">
+                <!-- Language Switcher (desktop only) -->
+                <div class="nav-lang-switcher">
+                    <?php foreach (Language::available() as $code => $label): ?>
+                        <a href="<?= url('/lang/' . $code) ?>" class="<?= Language::current() === $code ? 'active' : '' ?>"><?= strtoupper($code) ?></a>
+                    <?php endforeach; ?>
+                </div>
 
-            <!-- Mobile Toggle -->
-            <button class="nav-toggle" @click="mobileOpen = true" aria-label="Open menu">
-                <span></span><span></span><span></span>
-            </button>
+                <!-- Auth -->
+                <?php if (Auth::check()): ?>
+                    <a href="<?= url('/account') ?>" class="btn btn-outline btn-sm"><i class="fas fa-user"></i> <?= e(Session::get('user_name', '')) ?></a>
+                <?php else: ?>
+                    <a href="<?= url('/login') ?>" class="btn btn-outline btn-sm"><?= __('nav.login') ?></a>
+                <?php endif; ?>
+
+                <!-- Mobile Toggle -->
+                <button class="nav-toggle" @click="mobileOpen = true" aria-label="Open menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
         </div>
-    </div>
+    </nav>
 
-    <!-- ═══ MOBILE OFFCANVAS DRAWER ═══ -->
+    <!-- ═══ OFFCANVAS DRAWER (outside nav to avoid flex layout issues) ═══ -->
+
     <!-- Overlay -->
     <div class="offcanvas-overlay"
          :class="{ 'active': mobileOpen }"
          @click="mobileOpen = false"></div>
 
     <!-- Drawer -->
-    <div class="offcanvas-drawer" :class="{ 'open': mobileOpen }"
+    <div class="offcanvas-drawer"
+         :class="{ 'open': mobileOpen }"
          x-effect="document.body.classList.toggle('offcanvas-open', mobileOpen)">
         <!-- Header -->
         <div class="offcanvas-header">
@@ -96,4 +101,4 @@
             </div>
         </div>
     </div>
-</nav>
+</div>

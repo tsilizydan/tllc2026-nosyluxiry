@@ -13,14 +13,14 @@
                     <tr><td colspan="7" style="text-align:center;color:#666;padding:2rem;">No reviews yet.</td></tr>
                 <?php else: foreach ($reviews as $r): ?>
                 <tr>
-                    <td><strong style="color:#fff;"><?= e($r->guest_name ?? $r->name ?? '—') ?></strong></td>
+                    <td><strong style="color:#fff;"><?= e($r->reviewer_name ?? '—') ?></strong></td>
                     <td style="color:#888;"><?= e($r->tour_name ?? '—') ?></td>
                     <td>
                         <?php for ($i = 1; $i <= 5; $i++): ?>
                             <i class="fa<?= $i <= ($r->rating ?? 5) ? 's' : 'r' ?> fa-star" style="color:<?= $i <= ($r->rating ?? 5) ? '#d4af37' : '#333' ?>;font-size:0.75rem;"></i>
                         <?php endfor; ?>
                     </td>
-                    <td style="max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;"><?= e($r->comment ?? $r->content ?? '') ?></td>
+                    <td style="max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;"><?= e($r->comment ?? '') ?></td>
                     <td>
                         <?php if ($r->is_approved): ?>
                             <span class="status-badge status-active">Approved</span>

@@ -270,3 +270,49 @@ function counterAnimation(target, duration = 2000) {
     };
 }
 
+/**
+ * Dark / Light mode toggle
+ */
+function toggleTheme() {
+    const html = document.documentElement;
+    const current = html.getAttribute('data-theme') || 'dark';
+    const next = current === 'dark' ? 'light' : 'dark';
+
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+    updateThemeIcons(next);
+}
+
+function updateThemeIcons(theme) {
+    const lightIcon = document.getElementById('theme-icon-light');
+    const darkIcon = document.getElementById('theme-icon-dark');
+    if (!lightIcon || !darkIcon) return;
+
+    if (theme === 'light') {
+        // In light mode, show moon icon (to switch to dark)
+        lightIcon.style.display = 'none';
+        darkIcon.style.display = 'inline';
+    } else {
+        // In dark mode, show sun icon (to switch to light)
+        lightIcon.style.display = 'inline';
+        darkIcon.style.display = 'none';
+    }
+}
+
+// Initialize icons on page load
+document.addEventListener('DOMContentLoaded', function () {
+    const theme = document.documentElement.getAttribute('data-theme') || 'dark';
+    updateThemeIcons(theme);
+
+    // Listen for system preference changes (only if user hasn't manually set)
+    if (window.matchMedia) {
+        window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', function (e) {
+            if (!localStorage.getItem('theme')) {
+                const newTheme = e.matches ? 'light' : 'dark';
+                document.documentElement.setAttribute('data-theme', newTheme);
+                updateThemeIcons(newTheme);
+            }
+        });
+    }
+});
+

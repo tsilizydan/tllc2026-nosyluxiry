@@ -56,7 +56,7 @@ $router->post('/account/wishlist/toggle', 'AccountController@toggleWishlist', 'a
 $router->get('/partners', 'PageController@partners', 'partners');
 
 // ─── Language Switch ───
-$router->get('/lang/{code}', 'PageController@switchLang', 'lang.switch');
+$router->get('/switch-lang/{code}', 'PageController@switchLang', 'lang.switch');
 
 // ─── Newsletter ───
 $router->post('/newsletter', 'PageController@newsletter', 'newsletter');

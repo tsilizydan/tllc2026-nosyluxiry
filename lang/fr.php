@@ -19,6 +19,7 @@ return [
         'wishlist' => 'Favoris',
         'logout' => 'Déconnexion',
         'admin' => 'Tableau de Bord',
+        'partners' => 'Partenaires',
     ],
     'home' => [
         'hero_title' => 'Découvrez Madagascar',
@@ -41,6 +42,15 @@ return [
         'cta_title' => 'Prêt à Découvrir Madagascar ?',
         'cta_desc' => 'Laissez-nous créer votre voyage parfait. Chaque détail, chaque moment — sur mesure pour vous.',
         'cta_btn' => 'Commencer la Planification',
+        'difference' => 'La Différence <span class="text-gold">Nosy Luxury</span>',
+        'bestseller' => 'Best-seller',
+        'sale' => 'Promo',
+        'discover_more' => 'En savoir plus',
+        'stat_travelers' => 'Voyageurs Satisfaits',
+        'stat_experiences' => 'Expériences Uniques',
+        'stat_destinations' => 'Destinations',
+        'stat_satisfaction' => 'Taux de Satisfaction',
+        'testimonials_heading' => 'La Confiance des Voyageurs du <span class="text-gold">Monde Entier</span>',
     ],
     'tours' => [
         'title' => 'Circuits & Expériences',

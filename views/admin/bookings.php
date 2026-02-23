@@ -32,7 +32,7 @@
                         <strong style="color:#fff;"><?= e($b->guest_name) ?></strong><br>
                         <small style="color:#666;"><?= e($b->guest_email) ?></small>
                     </td>
-                    <td style="font-weight:700;color:#d4af37;"><?= formatPrice($b->total_price ?? $b->total ?? 0) ?></td>
+                    <td style="font-weight:700;color:#d4af37;"><?= formatPrice($b->total ?? 0) ?></td>
                     <td><span class="status-badge status-<?= $b->payment_status ?? 'pending' ?>"><?= ucfirst($b->payment_status ?? 'pending') ?></span></td>
                     <td><span class="status-badge status-<?= $b->status ?>"><?= ucfirst($b->status) ?></span></td>
                     <td style="white-space:nowrap;"><?= formatDate($b->created_at) ?></td>

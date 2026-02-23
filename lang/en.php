@@ -19,6 +19,7 @@ return [
         'wishlist' => 'Wishlist',
         'logout' => 'Sign Out',
         'admin' => 'Admin Dashboard',
+        'partners' => 'Partners',
     ],
     'home' => [
         'hero_title' => 'Discover Madagascar',
@@ -41,6 +42,15 @@ return [
         'cta_title' => 'Ready to Discover Madagascar?',
         'cta_desc' => 'Let us craft your perfect journey. Every detail, every moment — tailored to you.',
         'cta_btn' => 'Start Planning',
+        'difference' => 'The Nosy Luxury <span class="text-gold">Difference</span>',
+        'bestseller' => 'Bestseller',
+        'sale' => 'Sale',
+        'discover_more' => 'Discover more',
+        'stat_travelers' => 'Happy Travelers',
+        'stat_experiences' => 'Curated Experiences',
+        'stat_destinations' => 'Destinations',
+        'stat_satisfaction' => 'Satisfaction Rate',
+        'testimonials_heading' => 'Trusted by Travelers <span class="text-gold">Worldwide</span>',
     ],
     'tours' => [
         'title' => 'Tours & Experiences',

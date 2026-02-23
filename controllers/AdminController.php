@@ -401,13 +401,17 @@ class AdminController extends Controller
     // ══════════════════════════════════════
     public function reviews(): void
     {
-        $reviewModel = new Review();
-        $result = $reviewModel->paginate($this->getPage(), 20, '1', [], 'created_at DESC');
+        $reviews = $this->db->fetchAll(
+            "SELECT r.*, t.name as tour_name
+             FROM reviews r
+             LEFT JOIN tours t ON r.tour_id = t.id
+             ORDER BY r.created_at DESC
+             LIMIT 100"
+        );
         $this->view('admin.reviews', [
             'pageTitle' => 'Manage Reviews',
             'layout' => 'admin',
-            'reviews' => $result['items'],
-            'pagination' => $result,
+            'reviews' => $reviews,
         ]);
     }
 

@@ -28,8 +28,8 @@
                 <li role="none"><a href="<?= url('/tours') ?>" role="menuitem" class="<?= isActive('/tours') ?>"><?= __('nav.tours') ?></a></li>
                 <li role="none"><a href="<?= url('/trip-builder') ?>" role="menuitem" class="<?= isActive('/trip-builder') ?>"><?= __('nav.trip_builder') ?></a></li>
                 <li role="none"><a href="<?= url('/about') ?>" role="menuitem" class="<?= isActive('/about') ?>"><?= __('nav.about') ?></a></li>
-                <li role="none"><a href="<?= url('/blog') ?>" role="menuitem" class="<?= isActive('/blog') ?>">Blog</a></li>
-                <li role="none"><a href="<?= url('/partners') ?>" role="menuitem" class="<?= isActive('/partners') ?>">Partners</a></li>
+                <li role="none"><a href="<?= url('/blog') ?>" role="menuitem" class="<?= isActive('/blog') ?>"><?= __('nav.blog') ?></a></li>
+                <li role="none"><a href="<?= url('/partners') ?>" role="menuitem" class="<?= isActive('/partners') ?>"><?= __('nav.partners') ?></a></li>
                 <li role="none"><a href="<?= url('/contact') ?>" role="menuitem" class="<?= isActive('/contact') ?>"><?= __('nav.contact') ?></a></li>
             </ul>
 
@@ -38,7 +38,7 @@
                 <!-- Language Switcher -->
                 <div class="navbar__lang">
                     <?php foreach (Language::available() as $code => $label): ?>
-                        <a href="<?= url('/lang/' . $code) ?>" class="<?= Language::current() === $code ? 'active' : '' ?>"><?= strtoupper($code) ?></a>
+                        <a href="<?= url('/switch-lang/' . $code) ?>" class="<?= Language::current() === $code ? 'active' : '' ?>"><?= strtoupper($code) ?></a>
                     <?php endforeach; ?>
                 </div>
 
@@ -110,10 +110,10 @@
                 <i class="fas fa-info-circle"></i><?= __('nav.about') ?>
             </a>
             <a href="<?= url('/blog') ?>" @click="close()" class="<?= isActive('/blog') ?>">
-                <i class="fas fa-newspaper"></i>Blog
+                <i class="fas fa-newspaper"></i><?= __('nav.blog') ?>
             </a>
             <a href="<?= url('/partners') ?>" @click="close()" class="<?= isActive('/partners') ?>">
-                <i class="fas fa-handshake"></i>Partners
+                <i class="fas fa-handshake"></i><?= __('nav.partners') ?>
             </a>
             <a href="<?= url('/contact') ?>" @click="close()" class="<?= isActive('/contact') ?>">
                 <i class="fas fa-envelope"></i><?= __('nav.contact') ?>
@@ -135,7 +135,7 @@
         <div class="drawer__footer">
             <div class="drawer__lang">
                 <?php foreach (Language::available() as $code => $label): ?>
-                    <a href="<?= url('/lang/' . $code) ?>"
+                    <a href="<?= url('/switch-lang/' . $code) ?>"
                        class="<?= Language::current() === $code ? 'active' : '' ?>"
                        @click="close()"><?= strtoupper($code) ?></a>
                 <?php endforeach; ?>

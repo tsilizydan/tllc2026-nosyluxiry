@@ -14,7 +14,7 @@
             <?php foreach ($posts as $post): ?>
             <div class="card reveal">
                 <div class="card-image">
-                    <img src="<?= !empty($post->featured_image) ? upload_url($post->featured_image) : 'https://images.unsplash.com/photo-1504893524553-b855bce32c67?w=600&q=80' ?>" alt="<?= e($post->title) ?>" loading="lazy">
+                    <img src="<?= !empty($post->image) ? upload_url($post->image) : 'https://images.unsplash.com/photo-1504893524553-b855bce32c67?w=600&q=80' ?>" alt="<?= e($post->title) ?>" loading="lazy">
                     <?php if (!empty($post->category_name)): ?>
                     <span class="card-badge"><?= e($post->category_name) ?></span>
                     <?php endif; ?>
@@ -35,9 +35,9 @@
             <?php endforeach; ?>
         </div>
 
-        <?php if ($pagination['total_pages'] > 1): ?>
+        <?php if ($pagination['totalPages'] > 1): ?>
         <div class="pagination">
-            <?php for ($i = 1; $i <= $pagination['total_pages']; $i++): ?>
+            <?php for ($i = 1; $i <= $pagination['totalPages']; $i++): ?>
                 <?php if ($i == $pagination['page']): ?><span class="active"><?= $i ?></span>
                 <?php else: ?><a href="<?= url('/blog?page=' . $i) ?>"><?= $i ?></a><?php endif; ?>
             <?php endfor; ?>

@@ -18,9 +18,9 @@
 
 <section class="section section-darker" style="padding-top:var(--space-4);">
     <div class="container container-narrow">
-        <?php if (!empty($post->featured_image)): ?>
+        <?php if (!empty($post->image)): ?>
         <div style="border-radius:var(--radius-lg);overflow:hidden;margin-bottom:var(--space-10);">
-            <img src="<?= upload_url($post->featured_image) ?>" alt="<?= e($post->title) ?>" style="width:100%;">
+            <img src="<?= upload_url($post->image) ?>" alt="<?= e($post->title) ?>" style="width:100%;">
         </div>
         <?php endif; ?>
 
@@ -55,7 +55,7 @@
                 <?php foreach ($recentPosts as $p): ?>
                 <div class="card">
                     <div class="card-image">
-                        <img src="<?= !empty($p->featured_image) ? upload_url($p->featured_image) : 'https://images.unsplash.com/photo-1504893524553-b855bce32c67?w=600&q=80' ?>" alt="<?= e($p->title) ?>" loading="lazy">
+                        <img src="<?= !empty($p->image) ? upload_url($p->image) : 'https://images.unsplash.com/photo-1504893524553-b855bce32c67?w=600&q=80' ?>" alt="<?= e($p->title) ?>" loading="lazy">
                     </div>
                     <div class="card-body">
                         <h3 style="font-size:var(--text-lg);"><a href="<?= url('/blog/' . $p->slug) ?>"><?= e($p->title) ?></a></h3>

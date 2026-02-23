@@ -52,9 +52,9 @@
         </div>
 
         <!-- Pagination -->
-        <?php if ($pagination['total_pages'] > 1): ?>
+        <?php if ($pagination['totalPages'] > 1): ?>
         <div class="pagination">
-            <?php for ($i = 1; $i <= $pagination['total_pages']; $i++): ?>
+            <?php for ($i = 1; $i <= $pagination['totalPages']; $i++): ?>
                 <?php if ($i == $pagination['page']): ?>
                     <span class="active"><?= $i ?></span>
                 <?php else: ?>

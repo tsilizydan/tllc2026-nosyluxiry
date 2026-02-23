@@ -25,7 +25,7 @@
     <div class="container">
         <div class="section-header reveal">
             <p class="subtitle"><?= __('home.why_title') ?></p>
-            <h2>The Nosy Luxury <span class="text-gold">Difference</span></h2>
+            <h2><?= __('home.difference') ?></h2>
             <div class="gold-line"></div>
         </div>
 
@@ -65,9 +65,9 @@
                     <div class="card-image">
                         <img src="<?= !empty($tour->image) ? upload_url($tour->image) : 'https://images.unsplash.com/photo-1504893524553-b855bce32c67?w=600&q=80' ?>" alt="<?= e($tour->name) ?>" loading="lazy">
                         <?php if ($tour->is_bestseller): ?>
-                            <span class="card-badge">Bestseller</span>
+                            <span class="card-badge"><?= __('home.bestseller') ?></span>
                         <?php elseif ($tour->sale_price): ?>
-                            <span class="card-badge" style="background:var(--color-coral)">Sale</span>
+                            <span class="card-badge" style="background:var(--color-coral)"><?= __('home.sale') ?></span>
                         <?php endif; ?>
                         <button class="card-wishlist" aria-label="Add to wishlist"><i class="far fa-heart"></i></button>
                     </div>
@@ -106,7 +106,7 @@
                 <div class="card">
                     <div class="card-image">
                         <img src="<?= $ph[4] ?>" alt="<?= $ph[0] ?>" loading="lazy">
-                        <?php if ($i === 0): ?><span class="card-badge">Bestseller</span><?php endif; ?>
+                        <?php if ($i === 0): ?><span class="card-badge"><?= __('home.bestseller') ?></span><?php endif; ?>
                         <button class="card-wishlist" aria-label="Add to wishlist"><i class="far fa-heart"></i></button>
                     </div>
                     <div class="card-body">
@@ -173,7 +173,7 @@
                     <img src="<?= $destImages[$i] ?>" alt="<?= $name ?>" loading="lazy">
                     <div class="destination-overlay">
                         <h3><?= $name ?></h3>
-                        <span class="tour-count">Discover more</span>
+                        <span class="tour-count"><?= __('home.discover_more') ?></span>
                     </div>
                 </a>
                 <?php endforeach;
@@ -190,25 +190,25 @@
                 <div class="text-gold" style="font-family:var(--font-heading);font-size:var(--text-4xl);font-weight:700;">
                     <span x-text="count">0</span>+
                 </div>
-                <p style="color:var(--color-gray-400);font-size:var(--text-sm);margin-top:var(--space-2);text-transform:uppercase;letter-spacing:0.1em;">Happy Travelers</p>
+                <p style="color:var(--color-gray-400);font-size:var(--text-sm);margin-top:var(--space-2);text-transform:uppercase;letter-spacing:0.1em;"><?= __('home.stat_travelers') ?></p>
             </div>
             <div x-data="counterAnimation(15)">
                 <div class="text-gold" style="font-family:var(--font-heading);font-size:var(--text-4xl);font-weight:700;">
                     <span x-text="count">0</span>+
                 </div>
-                <p style="color:var(--color-gray-400);font-size:var(--text-sm);margin-top:var(--space-2);text-transform:uppercase;letter-spacing:0.1em;">Curated Experiences</p>
+                <p style="color:var(--color-gray-400);font-size:var(--text-sm);margin-top:var(--space-2);text-transform:uppercase;letter-spacing:0.1em;"><?= __('home.stat_experiences') ?></p>
             </div>
             <div x-data="counterAnimation(6)">
                 <div class="text-gold" style="font-family:var(--font-heading);font-size:var(--text-4xl);font-weight:700;">
                     <span x-text="count">0</span>
                 </div>
-                <p style="color:var(--color-gray-400);font-size:var(--text-sm);margin-top:var(--space-2);text-transform:uppercase;letter-spacing:0.1em;">Destinations</p>
+                <p style="color:var(--color-gray-400);font-size:var(--text-sm);margin-top:var(--space-2);text-transform:uppercase;letter-spacing:0.1em;"><?= __('home.stat_destinations') ?></p>
             </div>
             <div x-data="counterAnimation(98)">
                 <div class="text-gold" style="font-family:var(--font-heading);font-size:var(--text-4xl);font-weight:700;">
                     <span x-text="count">0</span>%
                 </div>
-                <p style="color:var(--color-gray-400);font-size:var(--text-sm);margin-top:var(--space-2);text-transform:uppercase;letter-spacing:0.1em;">Satisfaction Rate</p>
+                <p style="color:var(--color-gray-400);font-size:var(--text-sm);margin-top:var(--space-2);text-transform:uppercase;letter-spacing:0.1em;"><?= __('home.stat_satisfaction') ?></p>
             </div>
         </div>
     </div>
@@ -219,7 +219,7 @@
     <div class="container">
         <div class="section-header reveal">
             <p class="subtitle"><?= __('home.testimonials_title') ?></p>
-            <h2>Trusted by Travelers <span class="text-gold">Worldwide</span></h2>
+            <h2><?= __('home.testimonials_heading') ?></h2>
             <div class="gold-line"></div>
         </div>
 

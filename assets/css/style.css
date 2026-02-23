@@ -404,10 +404,13 @@ h6 {
 .navbar__links {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: var(--space-1);
     list-style: none;
     margin: 0;
     padding: 0;
+    flex: 1;
+    min-width: 0;
 }
 
 .navbar__links a {

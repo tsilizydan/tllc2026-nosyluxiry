@@ -57,9 +57,9 @@
         </table>
     </div>
 
-    <?php if (isset($pagination) && $pagination['total_pages'] > 1): ?>
+    <?php if (isset($pagination) && $pagination['totalPages'] > 1): ?>
         <div class="admin-pagination">
-            <?php for ($i = 1; $i <= $pagination['total_pages']; $i++): ?>
+            <?php for ($i = 1; $i <= $pagination['totalPages']; $i++): ?>
                 <?php if ($i == $pagination['page']): ?>
                     <span class="current"><?= $i ?></span>
                 <?php else: ?>

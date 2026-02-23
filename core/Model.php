@@ -86,8 +86,8 @@ class Model
             'items' => $items,
             'total' => $total,
             'page' => $page,
-            'per_page' => $perPage,
-            'total_pages' => $totalPages,
+            'perPage' => $perPage,
+            'totalPages' => $totalPages,
         ];
     }
 

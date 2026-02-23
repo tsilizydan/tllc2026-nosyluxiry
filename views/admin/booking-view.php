@@ -12,7 +12,7 @@
                 <div><span style="color:#666;font-size:0.75rem;display:block;">Name</span><strong style="color:#fff;"><?= e($booking->guest_name) ?></strong></div>
                 <div><span style="color:#666;font-size:0.75rem;display:block;">Email</span><a href="mailto:<?= e($booking->guest_email) ?>" style="color:#d4af37;"><?= e($booking->guest_email) ?></a></div>
                 <div><span style="color:#666;font-size:0.75rem;display:block;">Phone</span><?= e($booking->guest_phone ?? '—') ?></div>
-                <div><span style="color:#666;font-size:0.75rem;display:block;">Guests</span><?= e($booking->adults ?? 0) ?> adults, <?= e($booking->children ?? 0) ?> children</div>
+                <div><span style="color:#666;font-size:0.75rem;display:block;">Guests</span><?= e($booking->num_guests ?? 1) ?> guest(s)</div>
             </div>
             <?php if ($booking->special_requests): ?>
                 <div style="margin-top:1rem;"><span style="color:#666;font-size:0.75rem;display:block;">Special Requests</span><p style="color:#ccc;font-size:0.85rem;"><?= e($booking->special_requests) ?></p></div>
@@ -87,7 +87,7 @@
             </div>
             <div style="display:flex;justify-content:space-between;padding:0.5rem 0;border-bottom:1px solid rgba(255,255,255,0.04);">
                 <span style="color:#888;">Total</span>
-                <strong style="color:#d4af37;font-size:1.1rem;"><?= formatPrice($booking->total_price) ?></strong>
+                <strong style="color:#d4af37;font-size:1.1rem;"><?= formatPrice($booking->total ?? 0) ?></strong>
             </div>
             <div style="display:flex;justify-content:space-between;padding:0.5rem 0;border-bottom:1px solid rgba(255,255,255,0.04);">
                 <span style="color:#888;">Payment</span>

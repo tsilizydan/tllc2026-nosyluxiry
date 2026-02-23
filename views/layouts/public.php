@@ -6,7 +6,7 @@ header('Referrer-Policy: strict-origin-when-cross-origin');
 header('Permissions-Policy: geolocation=(), microphone=(), camera=()');
 ?>
 <!DOCTYPE html>
-<html lang="<?= Language::current() ?>">
+<html lang="<?= Language::current() ?>" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -92,7 +92,19 @@ header('Permissions-Policy: geolocation=(), microphone=(), camera=()');
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="<?= asset('css/style.css') ?>?v=3.0">
+    <link rel="stylesheet" href="<?= asset('css/style.css') ?>?v=3.1">
+
+    <!-- Theme Init (prevents flash of wrong theme) -->
+    <script>
+        (function() {
+            var saved = localStorage.getItem('theme');
+            if (saved) {
+                document.documentElement.setAttribute('data-theme', saved);
+            } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
 
     <!-- Alpine.js -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -120,12 +132,18 @@ header('Permissions-Policy: geolocation=(), microphone=(), camera=()');
 
     <?php include VIEWS_PATH . '/partials/footer.php'; ?>
 
-    <!-- WhatsApp Float -->
-    <a href="https://wa.me/<?= e(setting('whatsapp_number', WHATSAPP_NUMBER)) ?>" target="_blank" class="whatsapp-float" aria-label="Chat on WhatsApp">
-        <i class="fab fa-whatsapp"></i>
-    </a>
+    <!-- Floating Button Stack -->
+    <div class="float-stack">
+        <button class="float-btn float-btn--theme" onclick="toggleTheme()" aria-label="Toggle dark/light mode">
+            <i class="fas fa-sun" id="theme-icon-light" style="display:none"></i>
+            <i class="fas fa-moon" id="theme-icon-dark"></i>
+        </button>
+        <a href="https://wa.me/<?= e(setting('whatsapp_number', WHATSAPP_NUMBER)) ?>" target="_blank" class="float-btn float-btn--whatsapp" aria-label="Chat on WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
 
     <!-- Custom JS -->
-    <script src="<?= asset('js/app.js') ?>?v=3.0"></script>
+    <script src="<?= asset('js/app.js') ?>?v=3.1"></script>
 </body>
 </html>

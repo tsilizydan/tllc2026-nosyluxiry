@@ -9,7 +9,7 @@
 define('APP_ENV', 'development'); // 'development' | 'production'
 
 // --- Application ---
-define('APP_NAME', 'Nosy Luxury');
+define('APP_NAME', 'Tsilizy Escapes');
 define('APP_TAGLINE', 'Discover Madagascar. Redefined.');
 define('APP_VERSION', '1.0.0');
 
@@ -75,3 +75,4 @@ define('ITEMS_PER_PAGE', 12);
 define('CONTACT_EMAIL', 'info@nosyluxury.com');
 define('CONTACT_PHONE', '+261 34 00 000 00');
 define('WHATSAPP_NUMBER', '+261340000000');
+

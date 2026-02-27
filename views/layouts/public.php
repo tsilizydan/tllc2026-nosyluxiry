@@ -59,11 +59,11 @@ header('Permissions-Policy: geolocation=(), microphone=(), camera=()');
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>">
     <link rel="icon" type="image/png" href="<?= e($ogImage ?? asset('images/favicon/favicon-96x96.png')) ?>" sizes="96x96" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="shortcut icon" href="/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/svg+xml" href="<?= e($ogImage ?? asset('images/favicon/favicon.svg')) ?>" />
+    <link rel="shortcut icon" href="<?= e($ogImage ?? asset('images/favicon/favicon.ico')) ?>" />
+    <link rel="apple-touch-icon" sizes="180x180" href="<?= e($ogImage ?? asset('images/favicon/apple-touch-icon.png')) ?>" />
     <meta name="apple-mobile-web-app-title" content="Tsilizy Escapes™" />
-    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="manifest" href="<?= e($ogImage ?? asset('images/favicon/site.webmanifest')) ?>" />
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -153,4 +153,5 @@ header('Permissions-Policy: geolocation=(), microphone=(), camera=()');
     <script src="<?= asset('js/app.js') ?>?v=3.1"></script>
 </body>
 </html>
+
 

@@ -6,7 +6,7 @@
             <div>
                 <div class="footer-brand">
                     <a href="<?= url('/') ?>" class="navbar-brand">
-                        <div class="brand-icon"><i class="fas fa-leaf"></i></div>
+                        <div class="brand-icon"><img src="<?= e($ogImage ?? asset('images/favicon/favicon-96x96.png')) ?>" class="img-fluid"></i></div>
                         <span>Tsilizy Escapes</span>
                     </a>
                 </div>
@@ -70,4 +70,5 @@
         </div>
     </div>
 </footer>
+
 

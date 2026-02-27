@@ -17,7 +17,7 @@
         <div class="navbar__container">
             <!-- Brand -->
             <a href="<?= url('/') ?>" class="navbar__brand">
-                <span class="navbar__brand-icon"><img src="" class="img-fluid"></span>
+                <span class="navbar__brand-icon"><img src="<?= e($ogImage ?? asset('images/favicon/favicon-96x96.png')) ?>" class="img-fluid"></span>
                 <span class="navbar__brand-text">Tsilizy Escapes</span>
             </a>
 
@@ -84,8 +84,8 @@
         <!-- Drawer Header -->
         <div class="drawer__header">
             <a href="<?= url('/') ?>" class="navbar__brand" @click="close()">
-                <span class="navbar__brand-icon"><i class="fas fa-leaf"></i></span>
-                <span class="navbar__brand-text">Nosy Luxury</span>
+                <span class="navbar__brand-icon"><img src="<?= e($ogImage ?? asset('images/favicon/favicon-96x96.png')) ?>" class="img-fluid"></span>
+                <span class="navbar__brand-text">Tsilizy Escapes</span>
             </a>
             <button class="drawer__close" @click="close()" aria-label="Close menu">
                 <i class="fas fa-times"></i>
@@ -144,5 +144,6 @@
         </div>
     </aside>
 </header>
+
 
 

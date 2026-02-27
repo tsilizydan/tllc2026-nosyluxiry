@@ -18,7 +18,7 @@
             <!-- Brand -->
             <a href="<?= url('/') ?>" class="navbar__brand">
                 <span class="navbar__brand-icon"><i class="fas fa-leaf"></i></span>
-                <span class="navbar__brand-text">Nosy Luxury</span>
+                <span class="navbar__brand-text">Tsilizy Escapes</span>
             </a>
 
             <!-- Desktop Links -->
@@ -140,7 +140,8 @@
                        @click="close()"><?= strtoupper($code) ?></a>
                 <?php endforeach; ?>
             </div>
-            <p class="drawer__copyright">© <?= date('Y') ?> Nosy Luxury</p>
+            <p class="drawer__copyright">© <?= date('Y') ?> Tsilizy Escapes</p>
         </div>
     </aside>
 </header>
+

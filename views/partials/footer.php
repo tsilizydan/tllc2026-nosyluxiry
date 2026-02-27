@@ -7,7 +7,7 @@
                 <div class="footer-brand">
                     <a href="<?= url('/') ?>" class="navbar-brand">
                         <div class="brand-icon"><i class="fas fa-leaf"></i></div>
-                        <span>Nosy Luxury</span>
+                        <span>Tsilizy Escapes</span>
                     </a>
                 </div>
                 <p class="footer-about"><?= __('footer.about') ?></p>
@@ -70,3 +70,4 @@
         </div>
     </div>
 </footer>
+

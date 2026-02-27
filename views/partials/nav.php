@@ -17,7 +17,7 @@
         <div class="navbar__container">
             <!-- Brand -->
             <a href="<?= url('/') ?>" class="navbar__brand">
-                <span class="navbar__brand-icon"><i class="fas fa-leaf"></i></span>
+                <span class="navbar__brand-icon"><img src="" class="img-fluid"></span>
                 <span class="navbar__brand-text">Tsilizy Escapes</span>
             </a>
 
@@ -144,4 +144,5 @@
         </div>
     </aside>
 </header>
+
 
